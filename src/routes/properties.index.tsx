@@ -18,14 +18,14 @@ type Search = {
 
 export const Route = createFileRoute("/properties/")({
   validateSearch: (s: Record<string, unknown>): Search => ({
-    q: typeof s['q'] === "string" ? s.q : undefined,
-    category: typeof s['category'] === "string" ? s.category : undefined,
-    location: typeof s['location'] === "string" ? s.location : undefined,
-    type: typeof s['type'] === "string" ? s.type : undefined,
+    q: typeof s['q'] === "string" ? (s["q"] as string) : undefined,
+    category: typeof s['category'] === "string" ? (s["category"] as string) : undefined,
+    location: typeof s['location'] === "string" ? (s["location"] as string) : undefined,
+    type: typeof s['type'] === "string" ? (s["type"] as string) : undefined,
     min: s['min'] ? Number(s['min']) : undefined,
     max: s['max'] ? Number(s['max']) : undefined,
     beds: s['beds'] ? Number(s['beds']) : undefined,
-    sort: typeof s['sort'] === "string" ? s.sort : undefined,
+    sort: typeof s['sort'] === "string" ? (s["sort"] as string) : undefined,
   }),
   head: () => ({
     meta: [
