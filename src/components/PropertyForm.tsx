@@ -11,7 +11,7 @@ import { imageUrl } from "@/lib/format";
 import { lookupsQuery, type PropertyRow } from "@/lib/queries";
 import { uploadImage } from "@/lib/upload";
 
-type Props = { initial?: PropertyRow; commissionerId: string; onDone: () => void };
+type Props = { initial?: PropertyRow | undefined; commissionerId: string; onDone: () => void };
 
 export function PropertyForm({ initial, commissionerId, onDone }: Props) {
   const lookups = useQuery(lookupsQuery);
@@ -44,7 +44,7 @@ export function PropertyForm({ initial, commissionerId, onDone }: Props) {
 
   async function save(e: React.FormEvent) {
     e.preventDefault();
-    if (f.images.length === 0) return toast.error("Add at least one image");
+    if (f.images.length === 0) { toast.error("Add at least one image"); return; }
     setBusy(true);
     const row = {
       ...f,
@@ -59,7 +59,7 @@ export function PropertyForm({ initial, commissionerId, onDone }: Props) {
       ? await supabase.from("properties").update(row).eq("id", initial.id)
       : await supabase.from("properties").insert({ ...row, commissioner_id: commissionerId });
     setBusy(false);
-    if (error) return toast.error(error.message.includes("row-level") ? "You need an active subscription to publish." : error.message);
+    if (error) { toast.error(error.message.includes("row-level") ? "You need an active subscription to publish." : error.message); return; }
     toast.success(initial ? "Saved" : "Submitted for approval");
     onDone();
   }

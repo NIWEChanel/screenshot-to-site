@@ -6,26 +6,26 @@ import { useI18n } from "@/lib/i18n";
 import { lookupsQuery, publicPropertiesQuery } from "@/lib/queries";
 
 type Search = {
-  q?: string;
-  category?: string;
-  location?: string;
-  type?: string;
-  min?: number;
-  max?: number;
-  beds?: number;
-  sort?: string;
+  q?: string | undefined;
+  category?: string | undefined;
+  location?: string | undefined;
+  type?: string | undefined;
+  min?: number | undefined;
+  max?: number | undefined;
+  beds?: number | undefined;
+  sort?: string | undefined;
 };
 
 export const Route = createFileRoute("/properties/")({
   validateSearch: (s: Record<string, unknown>): Search => ({
-    q: typeof s.q === "string" ? s.q : undefined,
-    category: typeof s.category === "string" ? s.category : undefined,
-    location: typeof s.location === "string" ? s.location : undefined,
-    type: typeof s.type === "string" ? s.type : undefined,
-    min: s.min ? Number(s.min) : undefined,
-    max: s.max ? Number(s.max) : undefined,
-    beds: s.beds ? Number(s.beds) : undefined,
-    sort: typeof s.sort === "string" ? s.sort : undefined,
+    q: typeof s['q'] === "string" ? s.q : undefined,
+    category: typeof s['category'] === "string" ? s.category : undefined,
+    location: typeof s['location'] === "string" ? s.location : undefined,
+    type: typeof s['type'] === "string" ? s.type : undefined,
+    min: s['min'] ? Number(s['min']) : undefined,
+    max: s['max'] ? Number(s['max']) : undefined,
+    beds: s['beds'] ? Number(s['beds']) : undefined,
+    sort: typeof s['sort'] === "string" ? s.sort : undefined,
   }),
   head: () => ({
     meta: [
@@ -74,26 +74,26 @@ function Browse() {
       <h1 className="mb-6 text-4xl font-bold">{t("browse")}</h1>
       <div className="mb-8 grid gap-3 rounded-2xl border bg-card p-4 sm:grid-cols-2 lg:grid-cols-4">
         <Input placeholder={t("searchPh")} defaultValue={s.q} onChange={(e) => set({ q: e.target.value || undefined })} />
-        <select className={sel} value={s.category ?? ""} onChange={(e) => set({ category: e.target.value || undefined })}>
+        <select className={sel} value={s['category'] ?? ""} onChange={(e) => set({ category: e.target.value || undefined })}>
           <option value="">{t("allCategories")}</option>
           {lookups.data?.categories.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}
         </select>
-        <select className={sel} value={s.location ?? ""} onChange={(e) => set({ location: e.target.value || undefined })}>
+        <select className={sel} value={s['location'] ?? ""} onChange={(e) => set({ location: e.target.value || undefined })}>
           <option value="">{t("allLocations")}</option>
           {lookups.data?.locations.map((l) => <option key={l.id} value={l.id}>{l.name}</option>)}
         </select>
-        <select className={sel} value={s.type ?? ""} onChange={(e) => set({ type: e.target.value || undefined })}>
+        <select className={sel} value={s['type'] ?? ""} onChange={(e) => set({ type: e.target.value || undefined })}>
           <option value="">{t("any")}</option>
           <option value="sale">{t("forSale")}</option>
           <option value="rent">{t("forRent")}</option>
         </select>
         <Input type="number" placeholder={`${t("minPrice")} (RWF)`} defaultValue={s.min} onChange={(e) => set({ min: e.target.value ? Number(e.target.value) : undefined })} />
         <Input type="number" placeholder={`${t("maxPrice")} (RWF)`} defaultValue={s.max} onChange={(e) => set({ max: e.target.value ? Number(e.target.value) : undefined })} />
-        <select className={sel} value={s.beds ?? ""} onChange={(e) => set({ beds: e.target.value ? Number(e.target.value) : undefined })}>
+        <select className={sel} value={s['beds'] ?? ""} onChange={(e) => set({ beds: e.target.value ? Number(e.target.value) : undefined })}>
           <option value="">{t("minBeds")}: {t("any")}</option>
           {[1, 2, 3, 4, 5].map((n) => <option key={n} value={n}>{n}+</option>)}
         </select>
-        <select className={sel} value={s.sort ?? ""} onChange={(e) => set({ sort: e.target.value || undefined })}>
+        <select className={sel} value={s['sort'] ?? ""} onChange={(e) => set({ sort: e.target.value || undefined })}>
           <option value="">{t("sort")}: {t("newest")}</option>
           <option value="price_asc">{t("priceLow")}</option>
           <option value="price_desc">{t("priceHigh")}</option>

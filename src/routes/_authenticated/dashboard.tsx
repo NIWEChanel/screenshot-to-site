@@ -166,7 +166,7 @@ function Subscription({ cid, pays, onDone }: { cid: string; pays: Pay[]; onDone:
   async function submit() {
     if (!plan) return;
     const { error } = await supabase.from("payments").insert({ commissioner_id: cid, plan_id: plan, method, reference: ref || `DEMO-${Date.now()}` });
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     toast.success("Demo payment submitted — pending admin approval");
     setPlan(null); setRef(""); onDone();
   }

@@ -146,7 +146,7 @@ function Admin() {
                   <td className="space-x-1 pr-3 text-right">
                     {p.status === "pending" && <>
                       <Button size="sm" onClick={() => run(supabase.rpc("review_payment", { _id: p.id, _approve: true }), "Payment approved, subscription active")}>Approve</Button>
-                      <Button size="sm" variant="outline" onClick={() => { const r = prompt("Reason for rejection?") ?? undefined; run(supabase.rpc("review_payment", { _id: p.id, _approve: false, _note: r }), "Payment rejected"); }}>Reject</Button>
+                      <Button size="sm" variant="outline" onClick={() => { const r = prompt("Reason for rejection?") ?? ""; run(supabase.rpc("review_payment", { _id: p.id, _approve: false, _note: r }), "Payment rejected"); }}>Reject</Button>
                     </>}
                   </td>
                 </tr>
