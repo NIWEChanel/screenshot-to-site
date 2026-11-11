@@ -22,6 +22,13 @@
       "when": 1794411790728,
       "tag": "0002_secure_settings_and_media_reads",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1794411840277,
+      "tag": "0003_require_owner_for_media_signing",
+      "breakpoints": true
     }
   ]
 }
