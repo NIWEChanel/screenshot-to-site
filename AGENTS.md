@@ -30,5 +30,6 @@ use the editor.
 <!-- LOVABLE:END -->
 
 ## Project rules
+- Keep settings admin-only and restrict private media reads to owners/admins or files referenced by visible listings and active commissioner profiles; unpublished uploads must not be globally readable.
 - Demo data is flagged `is_demo`; `public.reset_demo_data()` (service_role only, called from the admin-only `resetDemoData` server fn) deletes and re-seeds only flagged rows — keep new demo seed data flagged so reset never touches real data.
 - Role-sensitive fields (commissioner status/subscription, property status/featured, payment status) are enforced by DB triggers and `review_payment` RPC, not the UI — keep business rules there.
