@@ -6,7 +6,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { ensureDemoAccount } from "@/lib/demo.functions";
+import { signInDemoAccount } from "@/lib/demo-login";
 import { homeForRoles } from "@/lib/auth";
 
 export const Route = createFileRoute("/auth")({
@@ -43,10 +43,8 @@ function AuthPage() {
   async function demoLogin(d: (typeof DEMOS)[number]) {
     setBusy(d.role);
     try {
-      await ensureDemoAccount({ data: { role: d.role } });
-      const { data, error } = await supabase.auth.signInWithPassword({ email: d.email, password: d.password });
-      if (error) throw error;
-      await goHome(data.user.id);
+      const user = await signInDemoAccount({ email: d.email, password: d.password });
+      await goHome(user.id);
     } catch (e) {
       toast.error((e as Error).message);
     } finally {
