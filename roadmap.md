@@ -1,4 +1,4 @@
-- [ ] Restrict public settings and uploaded-file access, then verify.
-- [ ] Verify demo sign-in after repairing Cloud credentials.
+- [x] Restrict public settings and uploaded-file access, then verify.
+- [x] Verify demo sign-in after repairing Cloud credentials.
 - [ ] Request public publishing.
 - [ ] Explain the separate Vercel hosting limitation.
