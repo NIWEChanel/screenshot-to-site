@@ -15,6 +15,13 @@
       "when": 1794326703109,
       "tag": "0001_media_policies",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1794411790728,
+      "tag": "0002_secure_settings_and_media_reads",
+      "breakpoints": true
     }
   ]
 }

@@ -1,0 +1,5 @@
+DROP POLICY "read settings" ON public.settings;
+REVOKE SELECT ON public.settings FROM anon;
+DROP POLICY "media public read" ON storage.objects;
+CREATE POLICY "media owner or admin read" ON storage.objects FOR SELECT TO authenticated USING (bucket_id = 'media' AND ((storage.foldername(name))[1] = auth.uid()::text OR public.has_role(auth.uid(), 'admin')));
+CREATE POLICY "media published listing read" ON storage.objects FOR SELECT TO anon, authenticated USING (bucket_id = 'media' AND (EXISTS (SELECT 1 FROM public.properties p, unnest(p.images) AS image_url WHERE p.status IN ('approved','sold','rented') AND split_part(split_part(image_url, '/storage/v1/object/sign/media/', 2), '?', 1) = storage.objects.name) OR EXISTS (SELECT 1 FROM public.commissioners c WHERE c.status = 'active' AND split_part(split_part(c.avatar_url, '/storage/v1/object/sign/media/', 2), '?', 1) = storage.objects.name)));
