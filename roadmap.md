@@ -2,3 +2,5 @@
 - [x] Verify demo sign-in after repairing Cloud credentials.
 - [ ] Public publishing awaits user approval; the publishing request was declined.
 - [x] Explain the separate Vercel hosting limitation.
+- [x] Remove private hosting-key requirements from demo sign-in and verify all three accounts.
+- [x] Keep demo reset protected; Vercel needs redeployment by its owner before these changes go live.
