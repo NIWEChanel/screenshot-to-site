@@ -1,0 +1,1 @@
+DROP POLICY "media published listing read" ON storage.objects;

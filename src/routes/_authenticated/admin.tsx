@@ -18,7 +18,7 @@ import { useRoles } from "@/lib/auth";
 import { resetDemoData } from "@/lib/demo.functions";
 
 export const Route = createFileRoute("/_authenticated/admin")({
-  head: () => ({ meta: [{ title: "Super admin — REBERO" }, { name: "description", content: "REBERO platform administration." }] }),
+  head: () => ({ meta: [{ title: "Super admin — REBERO" }, { name: "description", content: "REBERO platform administration." }, { property: "og:title", content: "Super admin — REBERO" }, { property: "og:description", content: "REBERO platform administration." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary" }] }),
   component: Admin,
 });
 
