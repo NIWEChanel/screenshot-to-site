@@ -15,7 +15,7 @@ import { lookupsQuery, PROPERTY_SELECT, type PropertyRow } from "@/lib/queries";
 import { uploadImage } from "@/lib/upload";
 
 export const Route = createFileRoute("/_authenticated/dashboard")({
-  head: () => ({ meta: [{ title: "Commissioner dashboard — REBERO" }, { name: "description", content: "Manage your REBERO listings and subscription." }] }),
+  head: () => ({ meta: [{ title: "Commissioner dashboard — REBERO" }, { name: "description", content: "Manage your REBERO listings and subscription." }, { property: "og:title", content: "Commissioner dashboard — REBERO" }, { property: "og:description", content: "Manage your REBERO listings and subscription." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary" }] }),
   component: Dashboard,
 });
 
